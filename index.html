@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,8 @@
             font-family: 'Helvetica Neue', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(to bottom right, #2c3e50, #4ca1af);
+            background-color: #2f3b45;
+            /* background: linear-gradient(to bottom right, #2c3e50, #4ca1af); */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -22,38 +24,48 @@
             background-color: #1c1c1c;
             border-radius: 15px;
             padding: 40px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 0px 30px rgba(0, 0, 0, 0.6);
             max-width: 650px;
             text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.5s, box-shadow 0.5s;
         }
 
         .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+            transform: scale(1.01);
+            box-shadow: 0px 0px 40px #4d9ead55;
+
         }
 
         .header {
             font-size: 3em;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-stretch: wider;
+            font-weight: 700;
+            letter-spacing: 5px;
+            /* font-stretch: ultra-expanded; */
             margin-bottom: 15px;
             color: #4ca1af;
-            text-shadow: 2px 2px 5px rgba(76, 161, 175, 0.5);
+            /* text-shadow: 2px 2px 25px rgba(255, 255, 255, 0.422); */
         }
 
         .content {
             font-size: 1.3em;
             line-height: 1.8;
-            margin-bottom: 30px;
-            background: linear-gradient(90deg, #556270, #4ca1af);
-            padding: 15px;
+            font-weight: 500;
+            font-family: 'Courier New', Courier, monospace;
+            /* margin-bottom: 30px; */
+            background: linear-gradient(90deg, #54717c, #4ca1af);
+            padding: 5%;
+            /* width: 90%; */
             border-radius: 10px;
-            box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.2);
+            /* box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.2); */
         }
 
         .signature {
             font-style: italic;
             font-size: 1.2em;
             color: #aaa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         .footer {
@@ -87,18 +99,40 @@
         .about-section {
             display: none;
             margin-top: 20px;
+            font-family: 'Courier New', Courier, monospace;
+            border: 1px solid rgba(39, 38, 38, 0.717);
             font-size: 1.1em;
             color: #ccc;
-            background: #2f3b45;
+            background: #22292f;
             padding: 15px;
             border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            /* box-shadow: 0 2px 10px rgba(152, 150, 150, 0.223); */
             animation: fadeIn 1s;
         }
 
+        .about-section:hover {
+            /* display: none; */
+            margin-top: 20px;
+            font-family: 'Courier New', Courier, monospace;
+            border: 1px solid rgb(255, 255, 255);
+            font-size: 1.1em;
+            color: #ccc;
+            background: #22292f;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0px 30px rgba(255, 255, 255, 0.479);
+            animation: fadeIn 1s;
+            transition: all .5s ease-in-out;
+        }
+
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         .visible {
@@ -112,13 +146,16 @@
         }
     </script>
 </head>
+
 <body>
     <div class="card">
         <div class="header">Welcome to My World</div>
         <div class="content">
-            Hi, I'm Kabin Parajuli. I am passionate about technology, design, and creating meaningful user experiences. This page is a reflection of my creativity and vision for aesthetics combined with functionality.
+            Hi, I'm Kabin Parajuli. I am passionate about technology, design, and creating meaningful user experiences.
+            This page is a reflection of my creativity and vision for aesthetics combined with functionality.
         </div>
         <div class="signature">- Kabin Parajuli</div>
         <button class="button" onclick="toggleAboutSection()">Learn More</button>
         <div class="about-section" id="about">
-            I am 18 years old and a dedicated web developer. I enjoy developing professional and visually appealing web pages that provide excellent user experiences. Web develop
+            I am 18 years old and a dedicated web developer. I enjoy developing professional and visually appealing web
+            pages that provide excellent user experiences. Web develop</div></div></body></html>
