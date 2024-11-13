@@ -1,9 +1,124 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>How to add custom domain on github with cloudflare</title>
-  </head>
-  <body>
-    <h1>welcome bro! progress is in progress</h1>
-  </body>
-</html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kabin Parajuli's Personal Page</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom right, #2c3e50, #4ca1af);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #e0e0e0;
+            overflow: hidden;
+        }
+
+        .card {
+            background-color: #1c1c1c;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            max-width: 650px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .header {
+            font-size: 3em;
+            margin-bottom: 15px;
+            color: #4ca1af;
+            text-shadow: 2px 2px 5px rgba(76, 161, 175, 0.5);
+        }
+
+        .content {
+            font-size: 1.3em;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            background: linear-gradient(90deg, #556270, #4ca1af);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .signature {
+            font-style: italic;
+            font-size: 1.2em;
+            color: #aaa;
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #888;
+            border-top: 1px solid #333;
+            padding-top: 10px;
+        }
+
+        .button {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #4ca1af;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1em;
+            box-shadow: 0 4px 10px rgba(76, 161, 175, 0.4);
+            cursor: pointer;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        .button:hover {
+            background-color: #3a8691;
+            box-shadow: 0 6px 15px rgba(58, 134, 145, 0.5);
+        }
+
+        .about-section {
+            display: none;
+            margin-top: 20px;
+            font-size: 1.1em;
+            color: #ccc;
+            background: #2f3b45;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .visible {
+            display: block;
+        }
+    </style>
+    <script>
+        function toggleAboutSection() {
+            const aboutSection = document.getElementById('about');
+            aboutSection.classList.toggle('visible');
+        }
+    </script>
+</head>
+<body>
+    <div class="card">
+        <div class="header">Welcome to My World</div>
+        <div class="content">
+            Hi, I'm Kabin Parajuli. I am passionate about technology, design, and creating meaningful user experiences. This page is a reflection of my creativity and vision for aesthetics combined with functionality.
+        </div>
+        <div class="signature">- Kabin Parajuli</div>
+        <button class="button" onclick="toggleAboutSection()">Learn More</button>
+        <div class="about-section" id="about">
+            I am 18 years old and a dedicated web developer. I enjoy developing professional and visually appealing web pages that provide excellent user experiences. Web develop
