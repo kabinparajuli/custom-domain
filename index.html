@@ -11,7 +11,6 @@
             margin: 0;
             padding: 0;
             background-color: #2f3b45;
-            /* background: linear-gradient(to bottom right, #2c3e50, #4ca1af); */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -26,14 +25,16 @@
             padding: 40px;
             box-shadow: 0 0px 30px rgba(0, 0, 0, 0.6);
             max-width: 650px;
+            width: 100%;
             text-align: center;
             transition: transform 0.5s, box-shadow 0.5s;
+            position: relative;
+            overflow: hidden;
         }
 
         .card:hover {
             transform: scale(1.01);
             box-shadow: 0px 0px 40px #4d9ead55;
-
         }
 
         .header {
@@ -42,10 +43,8 @@
             font-stretch: wider;
             font-weight: 700;
             letter-spacing: 5px;
-            /* font-stretch: ultra-expanded; */
             margin-bottom: 15px;
             color: #4ca1af;
-            /* text-shadow: 2px 2px 25px rgba(255, 255, 255, 0.422); */
         }
 
         .content {
@@ -53,12 +52,12 @@
             line-height: 1.8;
             font-weight: 500;
             font-family: 'Courier New', Courier, monospace;
-            /* margin-bottom: 30px; */
             background: linear-gradient(90deg, #54717c, #4ca1af);
             padding: 5%;
-            /* width: 90%; */
             border-radius: 10px;
-            /* box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.2); */
+            height: 1.8em; /* to prevent height change during typing */
+            display: inline-block;
+            color: #e0e0e0;
         }
 
         .signature {
@@ -66,14 +65,6 @@
             font-size: 1.2em;
             color: #aaa;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        .footer {
-            margin-top: 20px;
-            font-size: 0.9em;
-            color: #888;
-            border-top: 1px solid #333;
-            padding-top: 10px;
         }
 
         .button {
@@ -106,12 +97,10 @@
             background: #22292f;
             padding: 15px;
             border-radius: 10px;
-            /* box-shadow: 0 2px 10px rgba(152, 150, 150, 0.223); */
             animation: fadeIn 1s;
         }
 
         .about-section:hover {
-            /* display: none; */
             margin-top: 20px;
             font-family: 'Courier New', Courier, monospace;
             border: 1px solid rgb(255, 255, 255);
@@ -129,7 +118,6 @@
             from {
                 opacity: 0;
             }
-
             to {
                 opacity: 1;
             }
@@ -138,23 +126,80 @@
         .visible {
             display: block;
         }
-    </style>
-    <script>
-        function toggleAboutSection() {
-            const aboutSection = document.getElementById('about');
-            aboutSection.classList.toggle('visible');
+
+        .footer {
+            margin-top: 30px;
+            font-size: 1em;
+            color: #888;
+            padding-top: 10px;
         }
-    </script>
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .social-icons img {
+            width: 30px;
+            height: 30px;
+        }
+    </style>
 </head>
 
 <body>
     <div class="card">
         <div class="header">DISCOVER MY DIGITAL SPACE</div>
-        <div class="content">
-            Hi, I'm Kabin Parajuli. I am passionate about technology, design, and creating meaningful user experiences.
-        </div>
+        <div class="content" id="typing-text"></div>
         <div class="signature">- Kabin Parajuli</div>
         <button class="button" onclick="toggleAboutSection()">EXPLORE MY WORK</button>
         <div class="about-section" id="about">
             I am 18 years old and a dedicated web developer. I enjoy developing professional and visually appealing web
-            pages that provide excellent user experiences. Web develop</div></div></body></html>
+            pages that provide excellent user experiences.
+        </div>
+        <div class="footer">
+            <p>Follow us on:</p>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/Kabinparajul" target="_blank">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
+                </a>
+                <a href="https://www.instagram.com/kabin_parajuli" target="_blank">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+                </a>
+                <a href="https://twitter.com/@kabinparajuli1" target="_blank">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Twitter.svg" alt="Twitter">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const text = "Hi, I'm Kabin Parajuli. I am passionate about design,creating meaningful user experiences.";
+        const typingTextElement = document.getElementById('typing-text');
+        let index = 0;
+
+        function typeEffect() {
+            if (index < text.length) {
+                typingTextElement.innerHTML += text.charAt(index);
+                index++;
+                setTimeout(typeEffect, 50); // Adjust typing speed by changing the delay here
+            }
+        }
+
+        function toggleAboutSection() {
+            const aboutSection = document.getElementById('about');
+            aboutSection.classList.toggle('visible');
+        }
+
+        window.onload = typeEffect;
+    </script>
+</body>
+
+</html>
