@@ -163,73 +163,7 @@
         <div class="about-section" id="about">
             I am 18 years old and a dedicated web developer. I enjoy developing professional and visually appealing web
             pages that provide excellent user experiences.
-            using System;
-namespace ns
-{
-    class MatrixAddition
-    {
-        public static void Main(String[] args)
-        {
-            int r1, c1, r2, c2;
-            Console.WriteLine("Enter row and column of first matrix:");
-            r1 = int.Parse(Console.ReadLine());
-            c1 = int.Parse(Console.ReadLine());
-            Console.WriteLine("Enter row and column of second matrix:");
-            r2 = int.Parse(Console.ReadLine());
-            c2 = int.Parse(Console.ReadLine());
-
-            if (r1 == r2 && c1 == c2)
-            {
-                int[,] matrix1 = new int[r1, c1];
-                int[,] matrix2 = new int[r2, c2];
-                int[,] sum = new int[r1, c1];
-
-                Console.WriteLine("Enter data in first matrix:");
-                for (int i = 0; i < r1; i++)
-                {
-                    for (int j = 0; j < c1; j++)
-                    {
-                        matrix1[i, j] = int.Parse(Console.ReadLine());
-                    }
-                }
-
-                Console.WriteLine("Enter data in second matrix:");
-                for (int i = 0; i < r2; i++)
-                {
-                    for (int j = 0; j < c2; j++)
-                    {
-                        matrix2[i, j] = int.Parse(Console.ReadLine());
-                    }
-                }
-
-             
-                for (int i = 0; i < r1; i++)
-                {
-                    for (int j = 0; j < c1; j++)
-                    {
-                        sum[i, j] = matrix1[i, j] + matrix2[i, j];
-                    }
-                }
-
-                
-                Console.WriteLine("Resultant Matrix:");
-                for (int i = 0; i < r1; i++)
-                {
-                    for (int j = 0; j < c1; j++)
-                    {
-                        Console.Write(sum[i, j] + " ");
-                    }
-                    Console.WriteLine();
-                }
-            }
-            else
-            {
-                Console.WriteLine("Addition not possible!");
-            }
-        }
-    }
-}
-
+            
         </div>
         <div class="footer">
             <p>Follow us on:</p>
