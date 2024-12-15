@@ -85,11 +85,14 @@
         button:hover {
             background-color: #0066ff;
         }
-
     </style>
 </head>
 <body>
     <h1>Tic Tac Toe</h1>
+    <div>
+        <button onclick="setMode('twoPlayer')">Two Player</button>
+        <button onclick="setMode('singlePlayer')">Play with Bot</button>
+    </div>
     <div id="board">
         <div class="cell" onclick="makeMove(0, 0)"></div>
         <div class="cell" onclick="makeMove(0, 1)"></div>
@@ -111,22 +114,64 @@
             ['', '', ''],
             ['', '', '']
         ];
+        let mode = 'twoPlayer'; // Default mode
+
+        function setMode(selectedMode) {
+            mode = selectedMode;
+            resetGame();
+        }
 
         function makeMove(row, col) {
             if (board[row][col] === '' && !checkWinner()) {
                 board[row][col] = currentPlayer;
-                document.getElementById('result').innerHTML = '';
-                document.querySelector(`#board .cell:nth-child(${row * 3 + col + 1})`).textContent = currentPlayer;
-                document.querySelector(`#board .cell:nth-child(${row * 3 + col + 1})`).classList.add(currentPlayer.toLowerCase());
+                updateCell(row, col);
 
                 if (checkWinner()) {
                     document.getElementById('result').innerHTML = `${currentPlayer} wins!`;
+                    return;
+                } else if (board.flat().every(cell => cell !== '')) {
+                    document.getElementById('result').innerHTML = "It's a draw!";
+                    return;
+                }
+
+                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+
+                if (mode === 'singlePlayer' && currentPlayer === 'O') {
+                    botMove();
+                }
+            }
+        }
+
+        function botMove() {
+            let emptyCells = [];
+            for (let i = 0; i < 3; i++) {
+                for (let j = 0; j < 3; j++) {
+                    if (board[i][j] === '') {
+                        emptyCells.push([i, j]);
+                    }
+                }
+            }
+
+            if (emptyCells.length > 0) {
+                const [row, col] = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+                board[row][col] = 'O';
+                updateCell(row, col);
+
+                if (checkWinner()) {
+                    document.getElementById('result').innerHTML = `O wins!`;
                 } else if (board.flat().every(cell => cell !== '')) {
                     document.getElementById('result').innerHTML = "It's a draw!";
                 }
 
-                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+                currentPlayer = 'X';
             }
+        }
+
+        function updateCell(row, col) {
+            const cellIndex = row * 3 + col;
+            const cell = document.querySelector(`#board .cell:nth-child(${cellIndex + 1})`);
+            cell.textContent = board[row][col];
+            cell.classList.add(board[row][col].toLowerCase());
         }
 
         function checkWinner() {
