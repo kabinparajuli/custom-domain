@@ -13,6 +13,10 @@
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: 'Orbitron', sans-serif;
       background: linear-gradient(135deg, #2c003e, #240046, #3c096c);
@@ -22,6 +26,7 @@
 
     header {
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
       padding: 1rem 2rem;
@@ -32,10 +37,21 @@
       z-index: 1000;
     }
 
+    header h2 {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
     nav a {
       color: white;
-      margin: 0 1rem;
       text-decoration: none;
+      font-size: 1rem;
       transition: transform 0.3s, color 0.3s;
     }
 
@@ -51,11 +67,12 @@
       justify-content: center;
       align-items: center;
       text-align: center;
+      padding: 1rem;
       animation: fadeIn 2s ease-in;
     }
 
     .hero h1 {
-      font-size: 4rem;
+      font-size: clamp(2rem, 5vw, 4rem);
       color: #ff70d9;
       text-shadow: 0 0 15px #000;
       animation: pulse 2s infinite;
@@ -73,12 +90,12 @@
     }
 
     section {
-      padding: 4rem 2rem;
+      padding: 4rem 1rem;
       text-align: center;
     }
 
     section h2 {
-      font-size: 2.5rem;
+      font-size: clamp(2rem, 6vw, 2.5rem);
       margin-bottom: 1.5rem;
       color: #ff70d9;
     }
@@ -86,17 +103,9 @@
     section p {
       max-width: 800px;
       margin: 0 auto;
-      font-size: 1.1rem;
+      font-size: 1rem;
       line-height: 1.6;
-    }
-
-    .footer {
-      background-color: #111;
-      padding: 2rem;
-      text-align: center;
-      color: #aaa;
-      font-size: 0.9rem;
-      margin-top: 3rem;
+      padding: 0 1rem;
     }
 
     .section-img {
@@ -117,6 +126,26 @@
       max-width: 600px;
       box-shadow: 0 0 20px rgba(255, 112, 217, 0.2);
       animation: fadeIn 2s ease-in;
+    }
+
+    .footer {
+      background-color: #111;
+      padding: 2rem 1rem;
+      text-align: center;
+      color: #aaa;
+      font-size: 0.9rem;
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .card {
+        padding: 1.5rem;
+      }
     }
   </style>
 </head>
@@ -139,8 +168,8 @@
   <section id="about">
     <h2>About Us</h2>
     <div class="card">
-      <p>My name is <strong>Kabin Parajuli</strong>, an 18-year-old web developer with a passion for design, animation, and code. </p>
-      <h3>"Here's a glimpse of my optimized setup, where functionality meets design."</h3>
+      <p>My name is <strong>Kabin Parajuli</strong>, an 18-year-old web developer with a passion for design, animation, and code.</p>
+      <h3 style="margin-top: 1rem; color: #ffb6f2;">"Here's a glimpse of my optimized setup, where functionality meets design."</h3>
     </div>
     <img src="https://images.unsplash.com/photo-1616588589676-62b3bd4ff6d2?fm=jpg&q=60&w=1200&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Z2FtaW5nJTIwc2V0dXB8ZW58MHx8MHx8fDA%3D" alt="Gaming Setup" class="section-img" />
   </section>
@@ -149,7 +178,11 @@
     <h2>Contact</h2>
     <div class="card">
       <p>Email me at <a href="mailto:gamerkabin@gmail.com" style="color: #ff70d9;">gamerkabin@gmail.com</a></p>
-      <p>Follow me on <a href="https://www.instagram.com/kabin_parajuli" style="color: #ff70d9;">Instagram</a> | <a href="https://www.facebook.com/Kabinparajul" style="color: #ff70d9;">Facebook</a> | <a href="#" style="color: #ff70d9;">GitHub</a></p>
+      <p>Follow me on
+        <a href="https://www.instagram.com/kabin_parajuli" style="color: #ff70d9;">Instagram</a> |
+        <a href="https://www.facebook.com/Kabinparajul" style="color: #ff70d9;">Facebook</a> |
+        <a href="#" style="color: #ff70d9;">GitHub</a>
+      </p>
     </div>
   </section>
 
@@ -158,8 +191,7 @@
     <div class="card">
       <p>"Additional content is on the way—stay tuned!"</p>
     </div>
-    <img src="https://images.unsplash.com/photo-1495954222046-2c427ecb546d?fm=jpg&q=60&w=
-      3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Z2FtaW5nJTIwcm9vbXxlbnwwfHwwfHx8MA%3D%3D " width="600" height="400"/>
+    <img src="https://images.unsplash.com/photo-1495954222046-2c427ecb546d?fm=jpg&q=60&w=1200&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Z2FtaW5nJTIwcm9vbXxlbnwwfHwwfHx8MA%3D%3D" alt="Gaming Room" class="section-img" />
   </section>
 
   <footer class="footer">
