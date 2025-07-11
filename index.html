@@ -2,205 +2,169 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kabin/Parajuli</title>
-    <style>
-        body {
-            font-family: 'Helvetica Neue', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #2f3b45;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            color: #e0e0e0;
-            overflow: hidden;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gaming World</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        .card {
-            background-color: #1c1c1c;
-            border-radius: 15px;
-            padding: 40px;
-            box-shadow: 0 0px 30px rgba(0, 0, 0, 0.6);
-            max-width: 650px;
-            width: 100%;
-            text-align: center;
-            transition: transform 0.5s, box-shadow 0.5s;
-            position: relative;
-            overflow: hidden;
-        }
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(135deg, #2c003e, #240046, #3c096c);
+      color: white;
+      overflow-x: hidden;
+    }
 
-        .card:hover {
-            transform: scale(1.01);
-            box-shadow: 0px 0px 40px #4d9ead55;
-        }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(5px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
 
-        .header {
-            font-size: 3em;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-stretch: wider;
-            font-weight: 700;
-            letter-spacing: 5px;
-            margin-bottom: 15px;
-            color: #4ca1af;
-        }
+    nav a {
+      color: white;
+      margin: 0 1rem;
+      text-decoration: none;
+      transition: transform 0.3s, color 0.3s;
+    }
 
-        .content {
-            font-size: 1.3em;
-            line-height: 1.8;
-            font-weight: 500;
-            font-family: 'Courier New', Courier, monospace;
-            background: linear-gradient(90deg, #54717c, #4ca1af);
-            padding: 5%;
-            border-radius: 10px;
-            height: 1.8em; /* to prevent height change during typing */
-            display: inline-block;
-            color: #e0e0e0;
-        }
+    nav a:hover {
+      transform: scale(1.1);
+      color: #ff70d9;
+    }
 
-        .signature {
-            font-style: italic;
-            font-size: 1.2em;
-            color: #aaa;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+    .hero {
+      height: 100vh;
+      background: url('https://images5.alphacoders.com/111/1112387.jpg') no-repeat center center/cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      animation: fadeIn 2s ease-in;
+    }
 
-        .button {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 10px 20px;
-            background-color: #4ca1af;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 1em;
-            box-shadow: 0 4px 10px rgba(76, 161, 175, 0.4);
-            cursor: pointer;
-            transition: background-color 0.3s, box-shadow 0.3s;
-        }
+    .hero h1 {
+      font-size: 4rem;
+      color: #ff70d9;
+      text-shadow: 0 0 15px #000;
+      animation: pulse 2s infinite;
+    }
 
-        .button:hover {
-            background-color: #3a8691;
-            box-shadow: 0 6px 15px rgba(58, 134, 145, 0.5);
-        }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
 
-        .about-section {
-            display: none;
-            margin-top: 20px;
-            font-family: 'Courier New', Courier, monospace;
-            border: 1px solid rgba(39, 38, 38, 0.717);
-            font-size: 1.1em;
-            color: #ccc;
-            background: #22292f;
-            padding: 15px;
-            border-radius: 10px;
-            animation: fadeIn 1s;
-        }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
 
-        .about-section:hover {
-            margin-top: 20px;
-            font-family: 'Courier New', Courier, monospace;
-            border: 1px solid rgb(255, 255, 255);
-            font-size: 1.1em;
-            color: #ccc;
-            background: #22292f;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 0px 30px rgba(255, 255, 255, 0.479);
-            animation: fadeIn 1s;
-            transition: all .5s ease-in-out;
-        }
+    section {
+      padding: 4rem 2rem;
+      text-align: center;
+    }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
+    section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      color: #ff70d9;
+    }
 
-        .visible {
-            display: block;
-        }
+    section p {
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
 
-        .footer {
-            margin-top: 30px;
-            font-size: 1em;
-            color: #888;
-            padding-top: 10px;
-        }
+    .footer {
+      background-color: #111;
+      padding: 2rem;
+      text-align: center;
+      color: #aaa;
+      font-size: 0.9rem;
+      margin-top: 3rem;
+    }
 
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 10px;
-        }
+    .section-img {
+      width: 100%;
+      max-width: 800px;
+      height: auto;
+      margin: 2rem auto;
+      display: block;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(255, 112, 217, 0.5);
+    }
 
-        .social-icons a {
-            display: inline-block;
-            color: inherit;
-            text-decoration: none;
-        }
-
-        .social-icons img {
-            width: 30px;
-            height: 30px;
-        }
-    </style>
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 2rem;
+      margin: 2rem auto;
+      border-radius: 15px;
+      max-width: 600px;
+      box-shadow: 0 0 20px rgba(255, 112, 217, 0.2);
+      animation: fadeIn 2s ease-in;
+    }
+  </style>
 </head>
 
 <body>
+  <header>
+    <h2>KABIN</h2>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About Us</a>
+      <a href="#contact">Contact</a>
+      <a href="#others">Others</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="home">
+    <h1>Glad to have you here! Explore.</h1>
+  </section>
+
+  <section id="about">
+    <h2>About Us</h2>
     <div class="card">
-        <div class="header">DISCOVER MY DIGITAL SPACE</div>
-        <div class="content" id="typing-text"></div>
-        <div class="signature">- Kabin Parajuli</div>
-        <button class="button" onclick="toggleAboutSection()">EXPLORE MY WORK</button>
-        <div class="about-section" id="about">
-            I am 18 years old and a dedicated web developer. I enjoy developing professional and visually appealing web
-            pages that provide excellent user experiences.
-            
-        </div>
-        <div class="footer">
-            <p>Follow us on:</p>
-            <div class="social-icons">
-                <a href="https://www.facebook.com/Kabinparajul" target="_blank">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
-                </a>
-                <a href="https://www.instagram.com/kabin_parajuli" target="_blank">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
-                </a>
-                <a href="https://twitter.com/@kabinparajuli1" target="_blank">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Twitter.svg" alt="Twitter">
-                </a>
-            </div>
-        </div>
+      <p>My name is <strong>Kabin Parajuli</strong>, an 18-year-old web developer with a passion for design, animation, and code. </p>
+      <p>I believe in the power of creativity and technology to shape the future. Welcome to my world.</p>
+      <h3>"Here's a glimpse of my optimized setup, where functionality meets design."</h3>
     </div>
+    <img src="https://images.unsplash.com/photo-1616588589676-62b3bd4ff6d2?fm=jpg&q=60&w=1200&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Z2FtaW5nJTIwc2V0dXB8ZW58MHx8MHx8fDA%3D" alt="Gaming Setup" class="section-img" />
+  </section>
 
-    <script>
-        const text = "Hi, I'm Kabin Parajuli. I am passionate about design,creating meaningful user experiences.";
-        const typingTextElement = document.getElementById('typing-text');
-        let index = 0;
+  <section id="contact">
+    <h2>Contact</h2>
+    <div class="card">
+      <p>Email me at <a href="mailto:gamerkabin@gmail.com" style="color: #ff70d9;">gamerkabin@gmail.com</a></p>
+      <p>Follow me on <a href="https://www.instagram.com/kabin_parajuli" style="color: #ff70d9;">Instagram</a> | <a href="https://www.facebook.com/Kabinparajul" style="color: #ff70d9;">Facebook</a> | <a href="#" style="color: #ff70d9;">GitHub</a></p>
+    </div>
+  </section>
 
-        function typeEffect() {
-            if (index < text.length) {
-                typingTextElement.innerHTML += text.charAt(index);
-                index++;
-                setTimeout(typeEffect, 50); // Adjust typing speed by changing the delay here
-            }
-        }
+  <section id="others">
+    <h2>Extras</h2>
+    <div class="card">
+      <p>"Additional content is on the way—stay tuned!"</p>
+    </div>
+    <img src="https://wallpaperaccess.com/full/30469.jpg" alt="Gaming Tournament" class="section-img" />
+  </section>
 
-        function toggleAboutSection() {
-            const aboutSection = document.getElementById('about');
-            aboutSection.classList.toggle('visible');
-        }
-
-        window.onload = typeEffect;
-    </script>
+  <footer class="footer">
+    &copy; 2025 Kabin Parajuli | Built with 💻 and 🎮 passion.
+  </footer>
 </body>
 
 </html>
