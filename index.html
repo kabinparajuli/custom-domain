@@ -1,202 +1,243 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GameZone Loading…</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kabin Parajuli | Portfolio</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-    html {
-      scroll-behavior: smooth;
-    }
+    <style>
+        :root {
+            --purple: #bc13fe;
+            --blue: #00d4ff;
+            --dark: #02020a;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
 
-    body {
-      font-family: 'Orbitron', sans-serif;
-      background: linear-gradient(135deg, #2c003e, #240046, #3c096c);
-      color: white;
-      overflow-x: hidden;
-    }
+        body {
+            margin: 0; background: var(--dark); color: #fff;
+            font-family: 'Inter', sans-serif; overflow-x: hidden;
+            cursor: none;
+        }
 
-    header {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      background-color: rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(5px);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
+        #bg-canvas { position: fixed; top: 0; left: 0; z-index: -1; }
 
-    header h2 {
-      font-size: clamp(1.5rem, 4vw, 2rem);
-    }
+        #cursor {
+            width: 20px; height: 20px; border: 2px solid var(--blue);
+            border-radius: 50%; position: fixed; pointer-events: none;
+            z-index: 9999; box-shadow: 0 0 15px var(--blue);
+            display: flex; align-items: center; justify-content: center;
+        }
 
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: center;
-    }
+        .container {
+            max-width: 900px; margin: auto; padding: 60px 15px; text-align: center;
+        }
 
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-size: 1rem;
-      transition: transform 0.3s, color 0.3s;
-    }
+        .profile-img {
+            width: 150px; height: 150px; border-radius: 50%;
+            border: 4px solid var(--purple); box-shadow: 0 0 30px var(--purple);
+            margin-bottom: 20px; object-fit: cover;
+        }
 
-    nav a:hover {
-      transform: scale(1.1);
-      color: #ff70d9;
-    }
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem); margin: 10px 0;
+            background: linear-gradient(to right, #fff, var(--blue));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
 
-    .hero {
-      height: 100vh;
-      background: url('https://images5.alphacoders.com/111/1112387.jpg') no-repeat center center/cover;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 1rem;
-      animation: fadeIn 2s ease-in;
-    }
+        .nav-box {
+            display: flex; justify-content: center; gap: 15px; margin: 40px 0; flex-wrap: wrap;
+        }
 
-    .hero h1 {
-      font-size: clamp(2rem, 5vw, 4rem);
-      color: #ff70d9;
-      text-shadow: 0 0 15px #000;
-      animation: pulse 2s infinite;
-    }
+        .tab-btn {
+            padding: 12px 28px; border: 1px solid var(--blue);
+            background: var(--glass); color: var(--blue);
+            border-radius: 30px; cursor: pointer; font-weight: bold; transition: 0.3s;
+        }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
+        .tab-btn.active { background: var(--blue); color: #000; box-shadow: 0 0 20px var(--blue); }
 
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
+        .content-section { display: none; }
+        .content-section.active { display: block; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-    section {
-      padding: 4rem 1rem;
-      text-align: center;
-    }
+        .card {
+            background: var(--glass); padding: 35px; border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(15px);
+        }
 
-    section h2 {
-      font-size: clamp(2rem, 6vw, 2.5rem);
-      margin-bottom: 1.5rem;
-      color: #ff70d9;
-    }
+        #myBoard {
+            width: 320px; max-width: 90vw; margin: 20px auto;
+            border: 4px solid var(--blue); border-radius: 8px;
+        }
 
-    section p {
-      max-width: 800px;
-      margin: 0 auto;
-      font-size: 1rem;
-      line-height: 1.6;
-      padding: 0 1rem;
-    }
+        .ttt-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 12px; width: 220px; margin: 20px auto;
+        }
 
-    .section-img {
-      width: 100%;
-      max-width: 800px;
-      height: auto;
-      margin: 2rem auto;
-      display: block;
-      border-radius: 15px;
-      box-shadow: 0 0 20px rgba(255, 112, 217, 0.5);
-    }
+        .cell {
+            width: 65px; height: 65px; background: rgba(255,255,255,0.1);
+            border: 1px solid var(--purple); display: flex; align-items: center;
+            justify-content: center; font-size: 28px; cursor: pointer; border-radius: 12px;
+        }
 
-    .card {
-      background: rgba(255, 255, 255, 0.05);
-      padding: 2rem;
-      margin: 2rem auto;
-      border-radius: 15px;
-      max-width: 600px;
-      box-shadow: 0 0 20px rgba(255, 112, 217, 0.2);
-      animation: fadeIn 2s ease-in;
-    }
+        .btn {
+            padding: 10px 20px; border: 1px solid var(--blue); background: none;
+            color: var(--blue); cursor: pointer; border-radius: 8px; margin: 5px;
+        }
 
-    .footer {
-      background-color: #111;
-      padding: 2rem 1rem;
-      text-align: center;
-      color: #aaa;
-      font-size: 0.9rem;
-      margin-top: 3rem;
-    }
+        .btn.mode-active { background: var(--purple); color: #fff; border-color: var(--purple); }
 
-    @media (max-width: 600px) {
-      nav {
-        flex-direction: column;
-        gap: 0.5rem;
-      }
+        footer {
+            background: #000; padding: 50px 20px; border-top: 1px solid var(--purple);
+            text-align: center; margin-top: 60px;
+        }
 
-      .card {
-        padding: 1.5rem;
-      }
-    }
-  </style>
+        .social-links { display: flex; justify-content: center; gap: 30px; margin-bottom: 25px; }
+        .social-links a { color: #fff; font-size: 1.8rem; transition: 0.3s; }
+        .social-links a:hover { color: var(--blue); transform: translateY(-5px); }
+
+        @media (max-width: 600px) {
+            #cursor { display: none; }
+            body { cursor: auto; }
+        }
+    </style>
 </head>
-
 <body>
-  <header>
-    <h2>KABIN</h2>
-    <nav>
-      <a href="#home">Home</a>
-      <a href="#about">About Us</a>
-      <a href="#contact">Contact</a>
-      <a href="#others">Others</a>
-    </nav>
-  </header>
 
-  <section class="hero" id="home">
-    <h1>Glad to have you here! Explore.</h1>
-  </section>
+    <canvas id="bg-canvas"></canvas>
+    <div id="cursor">👁️</div>
 
-  <section id="about">
-    <h2>About Us</h2>
-    <div class="card">
-      <p>My name is <strong>Kabin Parajuli</strong>, an 18-year-old web developer with a passion for design, animation, and code.</p>
-      <h3 style="margin-top: 1rem; color: #ffb6f2;">"Here's a glimpse of my optimized setup, where functionality meets design."</h3>
+    <div class="container">
+        <img src="profile.jpeg" class="profile-img" alt="Kabin Parajuli">
+        
+        <h1>Kabin Parajuli</h1>
+        <p style="color: var(--blue); letter-spacing: 3px; font-weight: 300;">SOFTWARE Developer | 19 YEARS OLD</p>
+
+        <div class="nav-box">
+            <button class="tab-btn active" onclick="showTab('home', this)">Home</button>
+            <button class="tab-btn" onclick="showTab('tic-tac-toe', this)">Tic-Tac-Toe</button>
+            <button class="tab-btn" onclick="showTab('chess', this)">Chess</button>
+        </div>
+
+        <div id="home" class="content-section active">
+            <div class="card">
+                <h2 style="margin-top:0;">Welcome</h2>
+                <p style="font-size: 1.1rem; line-height: 1.6; opacity: 0.9;">Explore my interactive portfolio. I focus on creating immersive web experiences using clean code and modern logic.</p>
+            </div>
+        </div>
+
+        <div id="tic-tac-toe" class="content-section">
+            <div class="card">
+                <h3>Tic-Tac-Toe Arena</h3>
+                <button id="ttt-pva" class="btn mode-active" onclick="setTTTMode('pva')">vs Bot</button>
+                <button id="ttt-pvp" class="btn" onclick="setTTTMode('pvp')">vs Friend</button>
+                <div class="ttt-grid">
+                    <div class="cell" onclick="tttMove(0)"></div><div class="cell" onclick="tttMove(1)"></div><div class="cell" onclick="tttMove(2)"></div>
+                    <div class="cell" onclick="tttMove(3)"></div><div class="cell" onclick="tttMove(4)"></div><div class="cell" onclick="tttMove(5)"></div>
+                    <div class="cell" onclick="tttMove(6)"></div><div class="cell" onclick="tttMove(7)"></div><div class="cell" onclick="tttMove(8)"></div>
+                </div>
+                <p id="ttt-status">Your Turn (X)</p>
+                <button class="btn" onclick="resetTTT()">Reset Match</button>
+            </div>
+        </div>
+
+        <div id="chess" class="content-section">
+            <div class="card">
+                <h3>Chess Arena</h3>
+                <button id="chess-pva" class="btn" onclick="setChessMode('pva')">vs Bot</button>
+                <button id="chess-pvp" class="btn mode-active" onclick="setChessMode('pvp')">vs Friend</button>
+                <div id="myBoard"></div>
+                <p id="chess-status" style="color: var(--blue);">White to move</p>
+                <button class="btn" onclick="resetChess()">New Game</button>
+            </div>
+        </div>
     </div>
-    <img src="https://images.unsplash.com/photo-1616588589676-62b3bd4ff6d2?fm=jpg&q=60&w=1200&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Z2FtaW5nJTIwc2V0dXB8ZW58MHx8MHx8fDA%3D" alt="Gaming Setup" class="section-img" />
-  </section>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <div class="card">
-      <p>Email me at <a href="mailto:gamerkabin@gmail.com" style="color: #ff70d9;">gamerkabin@gmail.com</a></p>
-      <p>Follow me on
-        <a href="https://www.instagram.com/kabin_parajuli" style="color: #ff70d9;">Instagram</a> |
-        <a href="https://www.facebook.com/Kabinparajul" style="color: #ff70d9;">Facebook</a> |
-        <a href="#" style="color: #ff70d9;">GitHub</a>
-      </p>
-    </div>
-  </section>
+    <footer>
+        <div class="social-links">
+            <a href="https://www.facebook.com/Kabinparajul" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/kabin_parajuli" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="mailto:gamerkabin@gmail.com"><i class="fas fa-envelope"></i></a>
+        </div>
+        <p style="opacity:0.8;"><b>Email:</b> gamerkabin@gmail.com <br> <b>Phone:</b> +977 9806084177</p>
+    </footer>
 
-  <section id="others">
-    <h2>Extras</h2>
-    <div class="card">
-      <p>"Additional content is on the way—stay tuned!"</p>
-    </div>
-    <img src="https://images.unsplash.com/photo-1495954222046-2c427ecb546d?fm=jpg&q=60&w=1200&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Z2FtaW5nJTIwcm9vbXxlbnwwfHwwfHx8MA%3D%3D" alt="Gaming Room" class="section-img" />
-  </section>
+    <script>
+        // --- SOUNDS ---
+        const CHESS_SOUND = "data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YV9vT18AUE9QT1BPUFBQUE9QT1BQUE9QT09QUE9QT09QUFBQUE9PT09QT09QT09QT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0=";
+        const moveSfx = new Audio(CHESS_SOUND);
+        function playSfx() { moveSfx.currentTime = 0; moveSfx.play().catch(()=>{}); }
 
-  <footer class="footer">
-    &copy; 2025 Kabin Parajuli | Built with 💻 and 🎮 passion.
-  </footer>
+        // --- UI TAB LOGIC ---
+        function showTab(t, b) {
+            $('.content-section').removeClass('active'); $('#'+t).addClass('active');
+            $('.tab-btn').removeClass('active'); $(b).addClass('active');
+            if(t === 'chess') board.resize();
+        }
+
+        // --- CURSOR SCRIPT ---
+        document.addEventListener('mousemove', e => { 
+            const c = document.getElementById('cursor');
+            c.style.left = e.clientX+'px'; c.style.top = e.clientY+'px'; 
+        });
+
+        // --- BACKGROUND ANIMATION ---
+        const canvas = document.getElementById('bg-canvas'); const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        let stars = Array(120).fill().map(() => ({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, s: Math.random()*2, v: Math.random()*0.5 }));
+        function animate() {
+            ctx.fillStyle = '#02020a'; ctx.fillRect(0,0,canvas.width,canvas.height); ctx.fillStyle = '#fff';
+            stars.forEach(s => { ctx.beginPath(); ctx.arc(s.x, s.y, s.s, 0, Math.PI*2); ctx.fill(); s.y += s.v; if(s.y > canvas.height) s.y = 0; });
+            requestAnimationFrame(animate);
+        } animate();
+
+        // --- TIC TAC TOE LOGIC ---
+        let tttData = Array(9).fill(""); let tttP = "X"; let tttM = "pva";
+        function setTTTMode(m) { tttM = m; resetTTT(); $('.btn[id^="ttt-"]').removeClass('mode-active'); $('#ttt-'+m).addClass('mode-active'); }
+        function tttMove(i) {
+            if(tttData[i] || checkWT() || checkDT()) return;
+            tttData[i] = tttP; $('.cell').eq(i).text(tttP);
+            if(checkWT()) { $('#ttt-status').text(tttP + " Won! 🎉"); return; }
+            if(checkDT()) { $('#ttt-status').text("It's a Draw! 🤝"); return; }
+            tttP = tttP === "X" ? "O" : "X";
+            $('#ttt-status').text(tttP + "'s Turn");
+            if(tttM === "pva" && tttP === "O") setTimeout(() => {
+                let e = tttData.map((v,i)=>v===""?i:null).filter(v=>v!==null);
+                if(e.length) tttMove(e[Math.floor(Math.random()*e.length)]);
+            }, 500);
+        }
+        function checkWT() { const l = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]; return l.some(x => tttData[x[0]] && tttData[x[0]]===tttData[x[1]] && tttData[x[0]]===tttData[x[2]]); }
+        function checkDT() { return tttData.every(x => x!=="") && !checkWT(); }
+        function resetTTT() { tttData.fill(""); tttP="X"; $('.cell').text(""); $('#ttt-status').text("Your Turn (X)"); }
+
+        // --- CHESS LOGIC ---
+        var game = new Chess(); var board = null; var chessM = 'pvp';
+        function updC() { 
+            let s = game.turn()==='w'?'White to move':'Black to move'; 
+            if(game.in_checkmate()) s="Checkmate! " + (game.turn()==='w'?'Black':'White') + " wins."; 
+            else if(game.in_draw()) s="Draw Game!";
+            $('#chess-status').text(s);
+        }
+        function onDrop(s, t) {
+            var m = game.move({ from: s, to: t, promotion: 'q' });
+            if (m === null) return 'snapback';
+            playSfx(); updC();
+            if(chessM === 'pva' && !game.game_over()) setTimeout(() => {
+                let ms = game.moves(); if(!ms.length) return;
+                game.move(ms[Math.floor(Math.random()*ms.length)]);
+                playSfx(); board.position(game.fen()); updC();
+            }, 400);
+        }
+        function setChessMode(m) { chessM = m; resetChess(); $('.btn[id^="chess-"]').removeClass('mode-active'); $('#chess-'+m).addClass('mode-active'); }
+        function resetChess() { game.reset(); board.start(); updC(); }
+        board = Chessboard('myBoard', { draggable: true, position: 'start', onDrop, onSnapEnd: () => board.position(game.fen()), pieceTheme: 'https://chessboardjs.com/img/chesspieces/wikipedia/{piece}.png' });
+    </script>
 </body>
-
 </html>
