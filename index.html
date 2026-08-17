@@ -1,1037 +1,136 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Kabin Parajuli | Frontend Developer</title>
-
-<!-- Google Font -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-<!-- Font Awesome -->
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-<style>
-
-/* ================================
-   GLOBAL
-================================ */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-:root{
-    --bg:#030712;
-    --bg2:#07111f;
-    --card:rgba(15,23,42,.65);
-
-    --primary:#8b5cf6;
-    --primary-light:#a78bfa;
-    --secondary:#06b6d4;
-
-    --text:#ffffff;
-    --muted:#a7b0c0;
-
-    --border:rgba(255,255,255,.12);
-}
-
-/* LIGHT MODE */
-
-.light{
-    --bg:#f8fafc;
-    --bg2:#eef2ff;
-    --card:rgba(255,255,255,.75);
-
-    --text:#111827;
-    --muted:#4b5563;
-
-    --border:rgba(0,0,0,.1);
-}
-
-/* ================================
-   BODY
-================================ */
-
-body{
-    min-height:100vh;
-
-    color:var(--text);
-
-    background:
-        radial-gradient(
-            circle at 10% 20%,
-            rgba(124,58,237,.20),
-            transparent 30%
-        ),
-
-        radial-gradient(
-            circle at 90% 15%,
-            rgba(6,182,212,.15),
-            transparent 30%
-        ),
-
-        radial-gradient(
-            circle at 50% 100%,
-            rgba(124,58,237,.12),
-            transparent 35%
-        ),
-
-        linear-gradient(
-            135deg,
-            var(--bg),
-            var(--bg2)
-        );
-
-    overflow-x:hidden;
-
-    transition:
-        background .5s ease,
-        color .5s ease;
-}
-
-/* ================================
-   BACKGROUND DECORATION
-================================ */
-
-body::before{
-    content:"";
-    position:fixed;
-
-    width:500px;
-    height:500px;
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(124,58,237,.12),
-            transparent 70%
-        );
-
-    top:-180px;
-    left:-180px;
-
-    pointer-events:none;
-}
-
-body::after{
-    content:"";
-    position:fixed;
-
-    width:450px;
-    height:450px;
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(6,182,212,.10),
-            transparent 70%
-        );
-
-    right:-150px;
-    bottom:-150px;
-
-    pointer-events:none;
-}
-
-/* ================================
-   HERO
-================================ */
-
-.hero{
-    min-height:100vh;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    padding:
-        70px 7%;
-
-    position:relative;
-}
-
-/* ================================
-   HERO CONTENT
-================================ */
-
-.hero-content{
-    width:100%;
-    max-width:1400px;
-
-    display:grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    gap:80px;
-
-    align-items:center;
-
-    position:relative;
-    z-index:2;
-}
-
-/* ================================
-   LEFT SIDE
-================================ */
-
-.small-text{
-    display:inline-block;
-
-    letter-spacing:5px;
-
-    color:var(--primary-light);
-
-    font-size:.85rem;
-    font-weight:600;
-
-    margin-bottom:20px;
-
-    padding:
-        9px 16px;
-
-    border:
-        1px solid rgba(139,92,246,.25);
-
-    border-radius:50px;
-
-    background:
-        rgba(139,92,246,.08);
-
-    backdrop-filter:blur(10px);
-}
-
-.hero h1{
-    font-size:clamp(
-        3rem,
-        5vw,
-        5.5rem
-    );
-
-    line-height:1.05;
-
-    font-weight:800;
-
-    letter-spacing:-2px;
-}
-
-/* ================================
-   GRADIENT TEXT
-================================ */
-
-.gradient{
-    background:
-        linear-gradient(
-            90deg,
-            #8b5cf6,
-            #c084fc,
-            #06b6d4
-        );
-
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-
-    background-clip:text;
-}
-
-/* ================================
-   TYPING TEXT
-================================ */
-
-.typing-box{
-    margin-top:28px;
-
-    font-size:
-        clamp(
-            1.3rem,
-            2.5vw,
-            2rem
-        );
-
-    font-weight:600;
-}
-
-.typed{
-    color:var(--secondary);
-
-    text-shadow:
-        0 0 20px
-        rgba(6,182,212,.35);
-}
-
-.cursor{
-    color:var(--secondary);
-
-    animation:
-        blink .7s infinite;
-}
-
-@keyframes blink{
-
-    50%{
-        opacity:0;
-    }
-
-}
-
-/* ================================
-   DESCRIPTION
-================================ */
-
-.hero p{
-    margin-top:28px;
-
-    max-width:620px;
-
-    line-height:1.9;
-
-    color:var(--muted);
-
-    font-size:1.05rem;
-}
-
-/* ================================
-   SOCIALS
-================================ */
-
-.socials{
-    display:flex;
-
-    gap:15px;
-
-    margin-top:35px;
-}
-
-.socials a{
-    width:58px;
-    height:58px;
-
-    display:flex;
-
-    justify-content:center;
-    align-items:center;
-
-    border-radius:16px;
-
-    color:var(--text);
-
-    font-size:21px;
-
-    text-decoration:none;
-
-    border:
-        1px solid var(--border);
-
-    background:
-        rgba(255,255,255,.04);
-
-    backdrop-filter:
-        blur(15px);
-
-    transition:
-        transform .35s ease,
-        box-shadow .35s ease,
-        background .35s ease;
-}
-
-.socials a:hover{
-    transform:
-        translateY(-8px)
-        scale(1.05);
-
-    background:
-        rgba(124,58,237,.15);
-
-    box-shadow:
-        0 10px 35px
-        rgba(124,58,237,.35);
-}
-
-/* ================================
-   BUTTONS
-================================ */
-
-.buttons{
-    display:flex;
-
-    gap:18px;
-
-    margin-top:38px;
-}
-
-.btn{
-    padding:
-        15px 32px;
-
-    border-radius:14px;
-
-    text-decoration:none;
-
-    font-weight:600;
-
-    transition:
-        transform .3s ease,
-        box-shadow .3s ease;
-}
-
-.btn-primary{
-    color:white;
-
-    background:
-        linear-gradient(
-            100deg,
-            #7c3aed,
-            #06b6d4
-        );
-
-    box-shadow:
-        0 10px 30px
-        rgba(124,58,237,.25);
-}
-
-.btn-secondary{
-    color:var(--text);
-
-    border:
-        1px solid
-        rgba(139,92,246,.5);
-
-    background:
-        rgba(139,92,246,.05);
-}
-
-.btn:hover{
-    transform:
-        translateY(-5px);
-
-    box-shadow:
-        0 12px 35px
-        rgba(124,58,237,.3);
-}
-
-/* ================================
-   PHOTO SECTION
-================================ */
-
-.image-box{
-    display:flex;
-
-    justify-content:center;
-    align-items:center;
-
-    position:relative;
-}
-
-/* Glow behind photo */
-
-.image-box::before{
-    content:"";
-
-    position:absolute;
-
-    width:440px;
-    height:440px;
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(124,58,237,.30),
-            rgba(6,182,212,.08),
-            transparent 70%
-        );
-
-    filter:blur(20px);
-
-    animation:
-        photoGlow 5s ease-in-out infinite;
-}
-
-@keyframes photoGlow{
-
-    0%,100%{
-        transform:scale(1);
-    }
-
-    50%{
-        transform:scale(1.12);
-    }
-
-}
-
-/* ================================
-   PHOTO FRAME
-================================ */
-
-.image-frame{
-    width:440px;
-    height:570px;
-
-    padding:10px;
-
-    position:relative;
-
-    border-radius:35px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #8b5cf6,
-            #06b6d4,
-            #8b5cf6
-        );
-
-    box-shadow:
-        0 0 30px
-        rgba(124,58,237,.35),
-
-        0 30px 80px
-        rgba(0,0,0,.35);
-
-    z-index:2;
-
-    animation:
-        floating 5s ease-in-out infinite;
-}
-
-@keyframes floating{
-
-    0%,100%{
-        transform:translateY(0);
-    }
-
-    50%{
-        transform:translateY(-12px);
-    }
-
-}
-
-/* Inner photo */
-
-.image-frame::before{
-    content:"";
-
-    position:absolute;
-
-    inset:3px;
-
-    border-radius:32px;
-
-    background:
-        rgba(3,7,18,.9);
-
-    z-index:-1;
-}
-
-.image-frame img{
-    width:100%;
-    height:100%;
-
-    display:block;
-
-    object-fit:cover;
-
-    object-position:center;
-
-    border-radius:28px;
-
-    border:
-        2px solid
-        rgba(255,255,255,.12);
-
-    transition:
-        transform .5s ease;
-}
-
-.image-frame:hover img{
-    transform:scale(1.025);
-}
-
-/* ================================
-   THEME BUTTON
-================================ */
-
-.theme-btn{
-    position:fixed;
-
-    top:25px;
-    right:25px;
-
-    width:58px;
-    height:58px;
-
-    border:none;
-
-    border-radius:16px;
-
-    background:
-        rgba(15,23,42,.75);
-
-    color:white;
-
-    font-size:21px;
-
-    cursor:pointer;
-
-    z-index:999;
-
-    border:
-        1px solid
-        rgba(255,255,255,.12);
-
-    backdrop-filter:
-        blur(15px);
-
-    box-shadow:
-        0 10px 30px
-        rgba(0,0,0,.2);
-
-    transition:
-        .3s ease;
-}
-
-.theme-btn:hover{
-    transform:
-        rotate(20deg)
-        scale(1.08);
-
-    box-shadow:
-        0 0 25px
-        rgba(124,58,237,.4);
-}
-
-/* ================================
-   LIGHT MODE BUTTON
-================================ */
-
-.light .theme-btn{
-    background:#111827;
-    color:white;
-}
-
-/* ================================
-   RESPONSIVE
-================================ */
-
-@media(max-width:1100px){
-
-    .hero{
-        padding:
-            100px 6% 70px;
-    }
-
-    .hero-content{
-        gap:50px;
-    }
-
-    .image-frame{
-        width:380px;
-        height:500px;
-    }
-
-}
-
-@media(max-width:850px){
-
-    .hero{
-        min-height:auto;
-
-        padding:
-            120px 6% 70px;
-    }
-
-    .hero-content{
-        grid-template-columns:1fr;
-
-        text-align:center;
-
-        gap:60px;
-    }
-
-    .hero p{
-        margin-left:auto;
-        margin-right:auto;
-    }
-
-    .socials{
-        justify-content:center;
-    }
-
-    .buttons{
-        justify-content:center;
-
-        flex-wrap:wrap;
-    }
-
-    .image-frame{
-        width:350px;
-        height:470px;
-    }
-
-}
-
-@media(max-width:500px){
-
-    .hero{
-        padding:
-            100px 20px 60px;
-    }
-
-    .hero h1{
-        font-size:3rem;
-    }
-
-    .typing-box{
-        font-size:1.25rem;
-    }
-
-    .hero p{
-        font-size:.95rem;
-    }
-
-    .image-frame{
-        width:300px;
-        height:410px;
-    }
-
-    .theme-btn{
-        width:50px;
-        height:50px;
-
-        top:15px;
-        right:15px;
-    }
-
-}
-
-/* ================================
-   SELECTION
-================================ */
-
-::selection{
-    background:#8b5cf6;
-    color:white;
-}
-
-</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#020814">
+<title>Fishing Master Pro</title>
+<link rel="stylesheet" href="styles.css">
 </head>
-
-
 <body>
-
-<!-- ================================
-     THEME BUTTON
-================================ -->
-
-<button
-    class="theme-btn"
-    id="themeBtn"
-    onclick="toggleTheme()"
-    aria-label="Toggle theme">
-
-    🌙
-
-</button>
-
-
-<!-- ================================
-     HERO SECTION
-================================ -->
-
-<section class="hero">
-
-    <div class="hero-content">
-
-
-        <!-- ============================
-             LEFT CONTENT
-        ============================= -->
-
-        <div class="hero-text">
-
-            <div class="small-text">
-                WELCOME TO MY WORLD 👋
-            </div>
-
-
-            <h1>
-
-                Hello, I'm
-
-                <br>
-
-                <span class="gradient">
-                    Kabin Parajuli
-                </span>
-
-            </h1>
-
-
-            <!-- TYPING -->
-
-            <div class="typing-box">
-
-                I am
-
-                <span class="typed"></span>
-
-                <span class="cursor">
-                    |
-                </span>
-
-            </div>
-
-
-            <!-- DESCRIPTION -->
-
-            <p>
-
-                Passionate Frontend Developer crafting
-                modern, responsive and user-friendly web
-                experiences. Currently studying Computer
-                Engineering and continuously building
-                professional web applications.
-
-            </p>
-
-
-            <!-- ============================
-                 SOCIAL MEDIA
-            ============================= -->
-
-            <div class="socials">
-
-
-                <!-- FACEBOOK -->
-
-                <a
-                    href="https://www.facebook.com/kabinparajuli"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Facebook">
-
-                    <i class="fab fa-facebook-f"></i>
-
-                </a>
-
-
-                <!-- GITHUB -->
-
-                <a
-                    href="https://github.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="GitHub">
-
-                    <i class="fab fa-github"></i>
-
-                </a>
-
-
-                <!-- INSTAGRAM -->
-
-                <a
-                    href="https://www.instagram.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Instagram">
-
-                    <i class="fab fa-instagram"></i>
-
-                </a>
-
-            </div>
-
-
-            <!-- ============================
-                 BUTTONS
-            ============================= -->
-
-            <div class="buttons">
-
-                <a
-                    href="#contact"
-                    class="btn btn-primary">
-
-                    Hire Me
-
-                </a>
-
-
-                <a
-                    href="#projects"
-                    class="btn btn-secondary">
-
-                    View Projects
-
-                </a>
-
-            </div>
-
-        </div>
-
-
-        <!-- ============================
-             PHOTO
-        ============================= -->
-
-        <div class="image-box">
-
-            <div class="image-frame">
-
-                <!-- YOUR UPLOADED PHOTO -->
-
-                <img
-                    src="kabin_kanyam_side.jpg"
-                    alt="Kabin Parajuli">
-
-            </div>
-
-        </div>
-
+<div id="app">
+  <aside class="sidebar">
+    <div class="brand">🐟 <span>FISHING</span> <b>MASTER</b></div>
+    <div class="profile">
+      <div class="avatar">FM</div><div><b>Fisherman</b><small>LEVEL <span id="level">1</span></small></div>
+      <div class="xp"><i id="xpBar"></i></div>
     </div>
+    <nav>
+      <button class="nav-btn active" data-view="home">⌂ <span>Home</span></button>
+      <button class="nav-btn" data-view="fishing">🐟 <span>Fishing</span></button>
+      <button class="nav-btn" data-view="missions">🎯 <span>Missions</span></button>
+      <button class="nav-btn" data-view="tournament">🏆 <span>Tournament</span></button>
+      <button class="nav-btn" data-view="shop">🛒 <span>Shop</span></button>
+      <button class="nav-btn" data-view="rankings">📊 <span>Rankings</span></button>
+      <button class="nav-btn" data-view="settings">⚙ <span>Settings</span></button>
+    </nav>
+    <div class="daily-card">
+      <b>🎁 DAILY REWARD</b>
+      <small id="dailyStatus">Available today</small>
+      <button id="dailyBtn">CLAIM 500</button>
+    </div>
+  </aside>
 
-</section>
+  <main>
+    <header class="topbar">
+      <button class="mobile-menu" id="mobileMenu">☰</button>
+      <div class="mobile-logo">🐟 Fishing Master</div>
+      <div class="wallet">🪙 <div><small>VIRTUAL POINTS</small><strong id="balance">125,680</strong></div></div>
+      <button class="sound" id="soundBtn">🔊</button>
+    </header>
 
+    <section id="homeView" class="view active">
+      <div class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow">PREMIUM UNDERWATER ARCADE</span>
+          <h1>CATCH BIG.<br><em>WIN BIGGER.</em></h1>
+          <p>Dynamic fish, moving targets, combo chains, missions and timed rounds. Everything you see uses virtual arcade points only.</p>
+          <button class="primary" data-jump="fishing">ENTER OCEAN <span>→</span></button>
+        </div>
+        <div class="hero-art">🦈</div>
+        <i class="bubble x1"></i><i class="bubble x2"></i><i class="bubble x3"></i>
+      </div>
 
+      <div class="section-title"><h2>Game Modes</h2><button data-jump="fishing">PLAY →</button></div>
+      <div class="mode-grid">
+        <article class="mode classic" data-jump="fishing"><span>🐟</span><h3>Classic Ocean</h3><p>Dynamic targets</p><b>10× SCORE</b></article>
+        <article class="mode boss" data-jump="fishing"><span>🐉</span><h3>Golden Boss</h3><p>Boss hunt</p><b>100× SCORE</b></article>
+        <article class="mode tournament" data-jump="tournament"><span>🏆</span><h3>Tournament</h3><p>120-second round</p><b>LEADERBOARD</b></article>
+        <article class="mode golden" data-jump="fishing"><span>🎯</span><h3>Golden Shot</h3><p>Precision mode</p><b>50× SCORE</b></article>
+      </div>
 
-<script>
+      <div class="section-title"><h2>Recent Catches</h2><small>Local session</small></div>
+      <div id="recent" class="recent"></div>
+    </section>
 
-/* =================================
-   TYPING ANIMATION
-================================= */
+    <section id="fishingView" class="view">
+      <div class="game-head">
+        <div><span class="eyebrow">LIVE OCEAN</span><h1 id="roomTitle">Golden Ocean</h1><p>Tap/click a fish directly, or use the cannon.</p></div>
+        <div class="stats">
+          <div><small>ROUND</small><b id="round">01</b></div>
+          <div><small>SCORE</small><b id="roundScore">0</b></div>
+          <div><small>COMBO</small><b id="combo">x1</b></div>
+          <div><small>TIME</small><b id="roundTime">60</b></div>
+        </div>
+      </div>
 
-const words = [
+      <div id="arena" class="arena">
+        <div class="depth depth1"></div><div class="depth depth2"></div>
+        <div class="surface"></div><div class="seabed"></div>
+        <div id="fishLayer"></div>
+        <div id="effects"></div>
+        <div id="aim" class="aim"></div>
+        <div class="arena-label"><span class="live-dot"></span> LIVE • <b id="roomName">GOLDEN OCEAN</b><span>ROOM #A204</span></div>
 
-    "Frontend Developer",
+        <div class="bottom-ui">
+          <div class="player-mini"><div class="mini-avatar">FM</div><div><b>Fisherman</b><small>LV <span id="level2">1</span> • <span id="sessionPoints">0</span> pts</small></div></div>
+          <div class="power"><button id="powerMinus">−</button><div><small>POWER</small><b id="power">10</b></div><button id="powerPlus">+</button></div>
+          <button class="tool" id="autoBtn">◉ AUTO</button>
+          <button class="tool" id="turboBtn">🚀 TURBO</button>
+          <button class="shoot" id="shootBtn">🎯 SHOOT</button>
+        </div>
+      </div>
+      <div class="feed-box"><b>Recent catches</b><div id="feed"></div></div>
+    </section>
 
-    "Computer Engineering Student",
+    <section id="missionsView" class="view">
+      <div class="page-head"><span class="eyebrow">PROGRESSION</span><h1>Missions</h1><p>Each mission pays once when completed.</p></div>
+      <div id="missions" class="mission-grid"></div>
+    </section>
 
-    "React Developer",
+    <section id="tournamentView" class="view">
+      <div class="page-head"><span class="eyebrow">COMPETITIVE ARCADE</span><h1>Tournament</h1><p>One finite two-minute round. No infinite rewards.</p></div>
+      <div class="tournament-box">
+        <div id="tourTimer" class="timer">02:00</div>
+        <div id="tourScore" class="tour-score">0</div>
+        <small>YOUR VIRTUAL SCORE</small>
+        <button id="startTournament" class="primary">START ROUND</button>
+        <div id="leaderboard" class="leaderboard"></div>
+      </div>
+    </section>
 
-    "UI/UX Designer",
+    <section id="shopView" class="view">
+      <div class="page-head"><span class="eyebrow">COSMETICS</span><h1>Arcade Shop</h1><p>Permanent local cosmetic unlocks bought with virtual points.</p></div>
+      <div id="shop" class="shop-grid"></div>
+    </section>
 
-    "Web Designer"
+    <section id="rankingsView" class="view">
+      <div class="page-head"><span class="eyebrow">SCOREBOARD</span><h1>Rankings</h1><p>Local arcade leaderboard.</p></div>
+      <div id="rankings" class="rankings"></div>
+    </section>
 
-];
-
-let i = 0;
-
-let j = 0;
-
-let deleting = false;
-
-const typed =
-    document.querySelector(".typed");
-
-
-function type(){
-
-    const current =
-        words[i];
-
-
-    if(!deleting){
-
-        typed.textContent =
-            current.substring(0,j++);
-
-
-        if(j > current.length){
-
-            deleting = true;
-
-            setTimeout(
-                type,
-                1500
-            );
-
-            return;
-        }
-
-    }
-
-    else{
-
-        typed.textContent =
-            current.substring(0,j--);
-
-
-        if(j < 0){
-
-            deleting = false;
-
-            i =
-                (i + 1)
-                % words.length;
-
-        }
-
-    }
-
-
-    setTimeout(
-
-        type,
-
-        deleting
-            ? 60
-            : 120
-
-    );
-
-}
-
-
-type();
-
-
-
-/* =================================
-   DARK / LIGHT MODE
-================================= */
-
-function toggleTheme(){
-
-    document.body.classList.toggle("light");
-
-    const button =
-        document.getElementById("themeBtn");
-
-
-    if(
-        document.body.classList.contains("light")
-    ){
-
-        button.textContent = "☀️";
-
-    }
-
-    else{
-
-        button.textContent = "🌙";
-
-    }
-
-}
-
-</script>
-
+    <section id="settingsView" class="view">
+      <div class="page-head"><span class="eyebrow">CONTROL CENTER</span><h1>Settings</h1><p>Settings are saved on this device.</p></div>
+      <div class="settings">
+        <label>Sound effects <input id="soundToggle" type="checkbox"></label>
+        <label>Fish animation <input id="animToggle" type="checkbox"></label>
+        <label>Vibration on touch <input id="vibrateToggle" type="checkbox"></label>
+        <button class="danger" id="reset">RESET LOCAL PROGRESS</button>
+      </div>
+    </section>
+  </main>
+</div>
+<div id="toast" class="toast"></div>
+<script src="app.js"></script>
 </body>
 </html>
